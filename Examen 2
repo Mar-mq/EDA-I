@@ -1,0 +1,46 @@
+/#include <stdio.h>
+
+int max_recursivo(int arr[], int inicio, int fin) {
+    
+    if (inicio == fin) {
+        return arr[inicio];
+    }
+
+    int mitad = (inicio + fin) / 2;
+
+    int max_izq = max_recursivo(arr, inicio, mitad);
+    
+    int max_der = max_recursivo(arr, mitad + 1, fin);
+
+    if (max_izq > max_der) {
+        return max_izq;
+    } else {
+        return max_der;
+    }
+}
+
+int main() {
+    int n, i;
+
+    printf("Ingresa el tamano de la lista: \n");
+    scanf("%d", &n);
+
+    if (n <= 0) {
+        printf("La lista debe tener al menos un elemento.\n");
+        return 1;
+    }
+
+    int lista[n];
+
+    printf("Ingresa los elementos:\n");
+    for (i = 0; i < n; i++) {
+        printf("Elemento %d: ", i + 1);
+        scanf("%d", &lista[i]);
+    }
+
+    int resultado = max_recursivo(lista, 0, n - 1);
+
+    printf("El valor maximo es: %d\n", resultado);
+
+    return 0;
+}
